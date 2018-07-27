@@ -5,7 +5,7 @@ console.log('API Route Connected Successfully');
 var friendsHIMYM = require('../data/friends.js');
 
 
-//Includes Two Routes
+//Two Routes
 function apiRoutes(app) {
 
     //Get Route with the url /api/friends. Used to display a JSON of all possible friends.
@@ -31,12 +31,12 @@ function apiRoutes(app) {
 
         //Cross check the new friend entry with the existing ones
         var scoreComparisionArray = [];
-        for (var i = 0; i < friendsData.length; i++) {
+        for (var i = 0; i < friendsHIMYM.length; i++) {
 
             //Check each friend's scores/difference in points
             var currentComparison = 0;
             for (var j = 0; j < newFriend.scores.length; j++) {
-                currentComparison += Math.abs(newFriend.scores[j] - friendsData[i].scores[j]);
+                currentComparison += Math.abs(newFriend.scores[j] - friendsHIMYM[i].scores[j]);
             }
 
             //Push each comparison between friends
@@ -55,7 +55,7 @@ function apiRoutes(app) {
         }
 
         //If the 2 friends have the same comparison, then the NEWEST entry in the friendsData array is chosen
-        var bestFriendMatch = friendsData[bestMatchPosition];
+        var bestFriendMatch = friendsHIMYM[bestMatchPosition];
 
 
 
@@ -65,7 +65,7 @@ function apiRoutes(app) {
 
 
         //Push the new friend to the friends data array for storage
-        friendsData.push(newFriend);
+        friendsHIMYM.push(newFriend);
     });
 }
 //Export for use in server.js file

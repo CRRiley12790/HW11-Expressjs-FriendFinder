@@ -244,28 +244,19 @@
         $(document).ready(function () {
             // Event Listener for Submission
             $('#submitButton').on('click', function () {
-
-                // Check if all the user fields are completed
-                checkIfComplete(function () {
-                    // Proceed with AJAX call if all questions are answered
-                    if (CompleteFields) {
-                        collectInputs();
-                    }
-                    else {
-                        alert('Please complete all fields before submitting!');
-                    }
+                console.log("test"); 
+                collectInputs();
                 });
-            }); 
-                });
+            });
         
         function collectInputs() {
-            // New friend object
+            //New friend object
             var newFriend = {
                 name: $('#formName').val().trim(),
                 photo: $('#formImage').val().trim(),
                 scores: []
             };
-            // Loop through Questions to get scores
+            //Loop through Questions to get scores
             var scoresArray = [];
             $('.chosen-select').each(function () {
                 scoresArray.push(parseInt($(this).val()));
@@ -273,10 +264,11 @@
                 
                 .promise().done(function () {
 
-                    // Push array of scores to the new friend object
+                    //Push array of scores to the new friend object
                     newFriend.scores = scoresArray;
-                    // POST the newFriend to the friends.js file and get back the best match
+                    //POST the newFriend to the friends.js file and get back the best match
                     var currentURL = window.location.origin;
+                    console.log("test");
                     $.post(currentURL + "/api/friends", newFriend, function (data) {
                         // Add Best Match attributes to Modal
                         $('#matchName').text(data.name);
